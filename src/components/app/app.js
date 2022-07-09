@@ -5,6 +5,30 @@ import EmployeesList from '../employees-list/employees-list';
 import EmployeesAddForm from '../employees-add-form/employees-add-form';
 
 function App() {
+
+  // Массив с моковыми данными 
+
+  const data = [
+    {
+      name: "Aleksey",
+      salary: 1000,
+      currency: "$",
+      increase: false,
+    },
+    {
+      name: "Julia",
+      salary: 300,
+      currency: "₽",
+      increase: true
+    },
+    {
+      name: "Ivan",
+      salary: 500,
+      currency: "€",
+      increase: false
+    }
+  ]
+
   return (
     <div className="app">
         <AppInfo />
@@ -14,7 +38,7 @@ function App() {
             <AppFilter/>
         </div>
         
-        <EmployeesList/>
+        <EmployeesList data={data}  /* сюдаем передаем моковые данные*/ />
         <EmployeesAddForm/>
     </div>
   );
