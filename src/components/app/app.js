@@ -14,18 +14,21 @@ function App() {
       salary: 1000,
       currency: "$",
       increase: false,
+      id: 1,
     },
     {
       name: "Julia",
       salary: 300,
       currency: "₽",
-      increase: true
+      increase: true,
+      id: 2,
     },
     {
       name: "Ivan",
       salary: 500,
       currency: "€",
-      increase: false
+      increase: false,
+      id: 3,
     }
   ]
 

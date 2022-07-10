@@ -3,10 +3,16 @@ import EmployeesListItem from "../employees-list-item/employees-list-item";
 const EmployeesList = ({data}) => {
     
     const employees = data.map(item => {
+        
+        const {name, salary, currency, increase, id} = item;  // деструктуризируем массив
+
         return (
-          <EmployeesListItem name={item.name} salary={item.salary} currency={item.currency} increase={item.increase}/> // можно заменить на spread оператор {...item}
+          <EmployeesListItem name={name} salary={salary} currency={currency} increase={increase} key={id}/> // можно заменить на spread оператор {...item}
         )
      })
+
+     // уникальный идентификатор key должен быть уникальным только для своих соседей
+    
     return (
         <ul className="app-list list-group">
            {employees}
