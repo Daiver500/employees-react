@@ -1,23 +1,29 @@
 import EmployeesListItem from "../employees-list-item/employees-list-item";
+import { Component } from "react/cjs/react.production.min";
 
-const EmployeesList = ({data}) => {
-    
-    const employees = data.map(item => {
+class EmployeesList extends Component {
+
+    render() {
         
-        const {name, salary, currency, increase, id} = item;  // деструктуризируем массив
-
-        return (
-          <EmployeesListItem name={name} salary={salary} currency={currency} increase={increase} key={id}/> // можно заменить на spread оператор {...item}
-        )
-     })
-
-     // уникальный идентификатор key должен быть уникальным только для своих соседей
+        const {data} = this.props
+        const {deleteItem} = this.props
+       
+        const employees = data.map(item => { 
+          const {name, salary, currency, increase, id} = item;  // деструктуризируем массив
     
+          return (
+            <EmployeesListItem name={name} salary={salary} currency={currency} increase={increase} key={id} deleteItem={()=>deleteItem(id)}/> // можно заменить на spread оператор {...item}
+          )
+           
+           // уникальный идентификатор key должен быть уникальным только для своих соседей
+         })
+
     return (
         <ul className="app-list list-group">
            {employees}
         </ul>
     )
+    }
 }
 
 export default EmployeesList;
