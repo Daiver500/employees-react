@@ -7,12 +7,26 @@ class EmployeesList extends Component {
         
         const {data} = this.props
         const {deleteItem} = this.props
+        const {changeIncrease} = this.props
+        const {changeLike} = this.props
        
         const employees = data.map(item => { 
-          const {name, salary, currency, increase, id} = item;  // деструктуризируем массив
+        const {name, salary, currency, increase, like, id} = item;  
+        // деструктуризируем массив
     
           return (
-            <EmployeesListItem name={name} salary={salary} currency={currency} increase={increase} key={id} deleteItem={()=>deleteItem(id)}/> // можно заменить на spread оператор {...item}
+            <EmployeesListItem 
+              name={name} 
+              salary={salary} 
+              currency={currency} 
+              increase={increase} 
+              like={like}
+              key={id} 
+              deleteItem={()=>deleteItem(id)}
+              changeIncrease={()=>changeIncrease(id)}
+              changeLike={()=>changeLike(id)}
+              /> 
+              // можно заменить на spread оператор {...item}
           )
            
            // уникальный идентификатор key должен быть уникальным только для своих соседей

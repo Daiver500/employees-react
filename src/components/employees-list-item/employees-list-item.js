@@ -2,7 +2,7 @@ import { Component } from "react/cjs/react.production.min";
 // Классовый компонент
 
 class EmployeesListItem extends Component {
-    constructor(props) {
+    /*constructor(props) {
       super(props)
       this.state = {
         increase: false,
@@ -20,11 +20,12 @@ class EmployeesListItem extends Component {
       this.setState({
         like: !this.state.like
       })
-    }
+    }*/ // необходимо для работы на локальном уровне, заменили все на пропсы с верхнего уровня (changeIncrease, changeLike)
 
     render() {
-        const {name, salary, currency, deleteItem} = this.props
-        const {increase, like} = this.state
+        const {name, salary, currency, increase, like, deleteItem, changeIncrease, changeLike} = this.props
+        // const {increase, like} = this.state 
+        // теперь это props, которые приходят сверхуs
         let classNames = "list-group-item d-flex justify-content-between";
 
         if (increase) {
@@ -36,11 +37,17 @@ class EmployeesListItem extends Component {
         
         return (
         <li className={classNames}>
-        <span className="list-group-item-label" onClick={this.onEmployeeNameClick}>{name}</span>
+        <span className="list-group-item-label" 
+        // onClick={this.onEmployeeNameClick}
+        // заменили на метод ниже для отслеживания изменений на верхнем уровне
+        onClick={changeLike}>{name}</span>
         <input type="text" className="list-group-item-input" defaultValue={salary + currency}/>
         <div className='d-flex justify-content-center align-items-center'>
             <button type="button"
-                className="btn-cookie btn-sm" onClick={this.onCookieClick}>
+                className="btn-cookie btn-sm" 
+                // onClick={this.onCookieClick} 
+                // заменили на метод ниже для отслеживания изменений на верхнем уровне
+                onClick={changeIncrease}>
                 <i className="fas fa-cookie"></i>
             </button>
 

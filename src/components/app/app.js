@@ -16,6 +16,7 @@ class App extends Component {
           salary: 1000,
           currency: "$",
           increase: false,
+          like: true,
           id: 1,
         },
         {
@@ -23,6 +24,7 @@ class App extends Component {
           salary: 300,
           currency: "₽",
           increase: true,
+          like: false,
           id: 2,
         },
         {
@@ -30,6 +32,7 @@ class App extends Component {
           salary: 500,
           currency: "€",
           increase: false,
+          like: false,
           id: 3,
         }
       ]
@@ -63,6 +66,7 @@ class App extends Component {
       salary,
       currency,
       increase: false,
+      like: false,
       id: this.id++
     }
 
@@ -72,6 +76,39 @@ class App extends Component {
         data: newData
       }
     })
+  }
+
+  changeIncreaseParameter = (id) => {
+    this.setState(({data}) => ({
+
+       /*МЕТОД 1
+
+       const indexOfListElement = data.findIndex(item => item.id === id); 
+       // находим индекс каждого элемента массива (списка)
+
+       cons old = data[index];
+       const newItem = {...old, increase: !old.increase}
+       const newData = [...data.slice(0, index), newItem, ...data.slice(index+ 1)]
+       // новый массив
+       */
+
+      data: data.map(item => {
+      // здесь формируем новый объект с массивом внутри
+         if (item.id === id) {
+        //если id совпадает, добавляем новое состояние в объект, если нет возвращаем старый объект
+           return {...item, increase: !item.increase}
+         } else {
+           return item;
+         }
+        /*  К МЕТОДУ 1
+          data: newData
+         */
+      })
+    }))
+  }
+
+  changeLikeParameter = (id) => {
+    console.log(`Like this ${id}`)
   }
 
   render() {
@@ -84,8 +121,14 @@ class App extends Component {
             <AppFilter/>
         </div>
         
-        <EmployeesList data={this.state.data} deleteItem={this.deleteListItem}  /* сюдаем передаем моковые данные и функции по пользователям*/ />
-        <EmployeesAddForm addItem={this.addListItem}/>
+        <EmployeesList 
+          data={this.state.data} 
+          deleteItem={this.deleteListItem}  
+          changeIncrease={this.changeIncreaseParameter}
+          changeLike={this.changeLikeParameter}
+        /* сюдаем передаем моковые данные и функции по пользователям*/ />
+        <EmployeesAddForm 
+          addItem={this.addListItem}/>
     </div>
   );
   }
