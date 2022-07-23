@@ -11,8 +11,8 @@ class EmployeesList extends Component {
         const {changeLike} = this.props
        
         const employees = data.map(item => { 
-        const {name, salary, currency, increase, like, id} = item;  
-        // деструктуризируем массив
+          const {name, salary, currency, increase, like, id} = item;  
+          // деструктуризируем массив
     
           return (
             <EmployeesListItem 
