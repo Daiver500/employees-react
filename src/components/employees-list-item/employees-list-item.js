@@ -25,7 +25,7 @@ class EmployeesListItem extends Component {
     render() {
         const {name, salary, currency, increase, like, deleteItem, changeIncrease, changeLike} = this.props
         // const {increase, like} = this.state 
-        // теперь это props, которые приходят сверхуs
+        // теперь это props, которые приходят сверху
         let classNames = "list-group-item d-flex justify-content-between";
 
         if (increase) {

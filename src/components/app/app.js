@@ -55,7 +55,9 @@ class App extends Component {
          /*  К МЕТОДУ 1
           data: newData
          */
-        data: data.filter(item => item.id !== id)
+        data: data.filter((item => {
+          return item.id !== id
+        }))
        }
     })
   }
@@ -92,29 +94,48 @@ class App extends Component {
        // новый массив
        */
 
-      data: data.map(item => {
-      // здесь формируем новый объект с массивом внутри
-         if (item.id === id) {
-        //если id совпадает, добавляем новое состояние в объект, если нет возвращаем старый объект
-           return {...item, increase: !item.increase}
-         } else {
-           return item;
-         }
-        /*  К МЕТОДУ 1
-          data: newData
-         */
-      })
+   
+
+      data: data.map((item => {
+          // здесь формируем новый объект с массивом внутри
+          //если id совпадает, добавляем новое        
+          // состояние в объект, если нет возвращаем старый объект
+           
+          if (item.id === id) { 
+             return {...item, increase: !item.increase}
+           } else {
+             return item;
+           }
+          /*  К МЕТОДУ 1
+            data: newData
+          */
+
+      }))
+     }))
+  }
+
+  changeLikeParameter = (id) => {   // аналогично методу changeIncreaseParameter
+    this.setState(({data}) => ({
+      data: data.map((item => {
+         if (item.id === id) { 
+            return {...item, like: !item.like}
+          } else {
+            return item;
+          }
+     }))
     }))
   }
 
-  changeLikeParameter = (id) => {
-    console.log(`Like this ${id}`)
-  }
-
   render() {
+  const employeesQuantity = this.state.data.length;
+  const increasedEmployees = this.state.data.filter((item) => {
+    return item.increase
+  })
   return (
     <div className="app">
-        <AppInfo />
+        <AppInfo 
+          employeesQuantity={employeesQuantity}  
+          increasedEmployees={increasedEmployees.length}/>
 
         <div className="search-panel">
             <SearchPanel/>
